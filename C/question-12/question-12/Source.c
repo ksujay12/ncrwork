@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<math.h>
 int main()
 {
 	int n, b, x;
@@ -11,10 +12,22 @@ int main()
 }
 int funRot(n, b)
 {
-
-	int x;
-		x = n >> b;
-	return x;
+	int i = 0, result;
+	int temp = n;
+	while (n != 0)
+	{
+		n = n / 10;
+		i++;
+	}
+	while (b > 0)
+	{
+	result = (temp % 10)*(pow(10, i - 1)) + temp / 10;
+	temp = result;
+	b--;
+    }
+	
+	
+	return result;
 }
 
 
