@@ -18,7 +18,7 @@ int main()
 	k = ((val << 8) | (val >> 8)) & 0xFFFF;
 	printf("%x\n", k);
 
-	m= ((val <<12 ) | (val >> 4)) & 0xFFFF;
+	m= ((val <<12 & 0xFFFF) | (val >> 4)) ;
 	printf("%x", m);
 
 
