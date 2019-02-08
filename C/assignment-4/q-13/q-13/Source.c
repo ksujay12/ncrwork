@@ -1,27 +1,30 @@
-
-//fdsdf
 #include<stdio.h>
 #include<string.h>
 int main()
 {
 	char s[20], begin, end, x = '-';
-	int i, r;
+	int i, j;
 	scanf_s("%s", s, 20);
+	printf("%c", s[0]);
 	for (i = 0;i < strlen(s);i++)
 	{
-		if (strcmp_s(s[i], x,10) == 0)
+		if (s[i+1]==x)
 		{
-			begin = s[i - 1];
-			end = s[i + 1];
+			begin = s[i];
+			end = s[i + 2];
+			for (j = begin+1;j < end ;j++)
+			{
+				printf("%c", j);
+			}
+		}
+		else
+		{
+			printf("%c", s[i+1]);
 		}
 	}
-	r = begin - end;
-	while (r > 0)
-	{
-		s[i] = begin;
-		begin++;
-	}
-	printf("%s", s);
+	
+	
+
 
 	getch();
 	return 0;
