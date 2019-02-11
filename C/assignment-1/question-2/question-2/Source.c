@@ -4,6 +4,7 @@ int main()
 	char str[80];
 	int i = 0;
 	int l = 0, d = 0, b = 0, t = 0;
+	printf("enter the string\n");
 	gets(str);
 	while (str[i] != '\0')
 	{
@@ -13,12 +14,12 @@ int main()
 			l++;
 		if (str[i] == ' ')
 			b++;
-		if (str[i] == '\t')
+		if (str[i] == '$'||str[i]=='#'||str[i]=='@')
 			t++;
 		i++;
 
 	}
-	printf("%d %d %d %d", l, d, b, t);
+	printf("alpha= %d\n digits= %d \n space= %d\n special=  %d\n", l, d, b, t);
 	getch();
 	return 0;
 }
