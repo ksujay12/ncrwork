@@ -37,7 +37,7 @@ public: void computegrade()
 	{
 		strcpy(grade, "third class");
 	}
-	if (avg < 40)
+	if (marks1 < 40||marks2<40||marks3<40)
 	{
 		strcpy(grade, "FAIL");
 	}
@@ -56,7 +56,7 @@ public:void display()
 int main()
 {
 	student a;
-	a.set_data("sujay", 80, 65, 70);
+	a.set_data("sujay", 90, 65, 70);
 	a.average();
 	a.computegrade();
 	a.display();
