@@ -39,6 +39,7 @@ public:
 	~employee()
 	{
 		cout << "destructor" << endl;
+		system("pause");
 	}
 
 };
@@ -56,7 +57,7 @@ int main()
 	cout << e3.x << endl;
 	cout << e3.y << endl;
 	cout << sizeof(e1);
-	getchar();
+	system("pause");
 	return 0;
 
 }
