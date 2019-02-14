@@ -1,7 +1,7 @@
 #include<stdio.h>
 void a(void);
 void b(void);
-//void c(void);
+void c(void);
 void d(void);
 int main()
 {
@@ -18,8 +18,8 @@ int main()
 		break;
 	case 1:b();
 		break;
-	//case 2:c();
-		//break;
+	case 2:c();
+		break;
 	case 3:d();
 		break;
 	default:printf("please enter valid option\n");

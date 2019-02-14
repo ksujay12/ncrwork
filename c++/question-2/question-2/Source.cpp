@@ -33,7 +33,7 @@ public: void computegrade()
 	{
 		strcpy(grade, "second class");
 	}
-	if (40 < avg&&avg < 50)
+	if (40 <= avg&&avg < 50)
 	{
 		strcpy(grade, "third class");
 	}

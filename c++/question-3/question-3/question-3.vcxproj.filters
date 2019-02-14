@@ -15,28 +15,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source.c">
+    <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="a.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="d.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="b.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="c.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="some.txt">
-      <Filter>Source Files</Filter>
-    </Text>
-    <Text Include="one.txt">
-      <Filter>Source Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>
