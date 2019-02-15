@@ -1,65 +1,62 @@
 #include<iostream>
-#include<cstring>
 using namespace std;
-class student
+class Student
 {
+	int rollno;
+	char name[20];
+	int marks[6];
+	int totalmarks;
+	char grade;
 public:
-	char student_name[30];
-	char grade[30];
-	int marks1;
-	int marks2;
-	int marks3;
-	float avg;
-public: void set_data(const char name[30], int mark1, int mark2, int mark3)
-{
-	strcpy(student_name, name);
-	marks1 = mark1;
-	marks2 = mark2;
-	marks3 = mark3;
-}
-public:void average()
-{
-
-	avg = float(marks1 + marks2 + marks3) / 3;
-	cout << avg << endl;
-}
-public: void computegrade()
-{
-	if (avg > 60)
+	Student()
 	{
-		strcpy(grade, "first class");
+		rollno = 0;
+		grade = 0;
 	}
-	if (50 < avg &&avg < 60)
-	{
-		strcpy(grade, "second class");
-	}
-	if (40 <= avg && avg < 50)
-	{
-		strcpy(grade, "third class");
-	}
-	if (marks1 < 40 || marks2 < 40 || marks3 < 40)
-	{
-		strcpy(grade, "FAIL");
-	}
-}
-public:void display()
-{
-	cout << "name:" << student_name << endl;
-	cout << "grade:" << grade << endl;
-	cout << "marks1:" << marks1 << endl;
-	cout << "marks2:" << marks2 << endl;
-	cout << "marks3:" << marks3 << endl;
-
-
-}
+	friend ostream & operator << (ostream &cout, const Student &s);
+	friend istream & operator >> (istream &cin, Student &s);
+	friend void generate_results(Student s[], int n);
 };
+ostream& operator<<(ostream &cout, const Student &s)
+{
+	int i = 0;
+	cout << "Student Name = " << s.name << endl;
+	cout << "Grade = " << s.grade << endl;
+	cout << "Total Marks = " << endl << s.totalmarks;
+	cout << "Subject Marks are - " << endl;
+	for (i = 0;i < 6;i++)
+	{
+		cout << s.marks[i] << " ";
+	}
+	return cout;
+}
+istream& operator>>(istream &cin, Student &s)
+{
+	int i = 0;
+	cin >> s.rollno;
+	cin >> s.name;
+	cin >> s.grade;
+	cin >> s.totalmarks;
+	for (i = 0;i < 6;i++)
+	{
+		cin >> s.marks[i];
+	}
+	return cin;
+}
+void generate_results(Student s[], int n)
+{
+	cout << s[0].totalmarks << endl;
+	cout << s[1].totalmarks << endl;
+}
 int main()
 {
-	student a;
-	a.set_data("sujay", 90, 65, 70);
-	a.average();
-	a.computegrade();
-	a.display();
-	getchar();
+	//Student s1,s2;
+	//cin>>s1>>s2;
+	//cout<<s1<<s2;
+	Student s3[2];
+	cin >> s3[0] >> s3[1];
+	cout << s3[0] << s3[1];
+	generate_results(s3, 2);
+	system("pause");
 	return 0;
 }
