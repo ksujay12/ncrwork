@@ -74,9 +74,9 @@ char stack::peek()
 }
 void stack::display()
 {
-	for (int i = sta.top;i >= 0;i--)
+	for (int i = 0;i <= sta.top;i++)
 	{
-		cout << sta.s[i] << " ";
+		cout << sta.s[i];
 	}
 }
 stack::~stack()
@@ -85,15 +85,15 @@ stack::~stack()
 }
 int prec(char q)
 {
-	if ((q=='*') || (q=='/'))
+	if ((q == '*') || (q == '/'))
 	{
 		return 10;
 	}
-	if ((q=='+') || (q=='-'))
+	if ((q == '+') || (q == '-'))
 	{
 		return 7;
 	}
-	if ((q=='(') || (q==')'))
+	if ((q == '(') || (q == ')'))
 	{
 		return 1;
 	}
@@ -105,22 +105,25 @@ int prec(char q)
 	{
 		return 1;
 	}
-	
+
 }
 int main()
 {
 	int prec(char);
 	stack a;
+	char result[100];
+	int index = 0;
 	a.getsize(10);
 	int i, flag = 0;
 	string x;
 	cout << "enter string" << endl;
 	cin >> x;
-	for (i = 0;x[i] != '\0';i++)
+	int len = x.length();
+	for (i = len;i>=0;i--)
 	{
 		if (x[i] >= 'a'&&x[i] <= 'z')
 		{
-			cout << x[i] << " ";
+			result[index++] = x[i];
 		}
 		else
 		{
@@ -142,7 +145,7 @@ int main()
 				}
 				else
 				{
-					
+
 					if (prec(x[i]) > prec(a.peek()))
 					{
 						//cout << "push";
@@ -153,15 +156,21 @@ int main()
 					{
 						if (prec(x[i]) == prec(a.peek()))
 						{
-							//cout << a.pop();
+							char ch;
+							ch = a.pop();
+							
+							result[index++] = ch;
 							a.push(x[i]);
 						}
 						else {
 
-							if (prec(x[i]) < prec(a.peek()))
+						if (prec(x[i]) < prec(a.peek()))
 							{
 								//cout << "pop";
-								cout << a.pop();
+							char y;
+							y = a.pop();
+							
+							result[index++] = y;
 							}
 							a.push(x[i]);
 							break;
@@ -177,16 +186,16 @@ int main()
 					cout << a.pop();
 				}
 				a.pop();
-				
+
 				break;
 
 			case')':
 
 				while (a.peek() != '(') {
 					cout << a.pop();
-				} 
+				}
 				a.pop();
-				
+
 				break;
 
 			case'}':
@@ -195,14 +204,17 @@ int main()
 					cout << a.pop();
 				}
 				a.pop();
-				
+
 				break;
 			}
 		}
-		
-	}
 
+	}
 	a.display();
+	
+	for(i=index;i>=0;i--)
+	cout << result[i];
+	
 
 	system("pause");
 	return 0;
