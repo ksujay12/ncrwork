@@ -153,7 +153,7 @@ int main()
 					{
 						if (prec(x[i]) == prec(a.peek()))
 						{
-							//cout << a.pop();
+							cout << a.pop();
 							a.push(x[i]);
 						}
 						else {
