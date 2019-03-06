@@ -7,8 +7,8 @@ int main()
 	HANDLE hThread;
 	DWORD dwThreadId;
 	char content[100];
-	SECURITY_ATTRIBUTES sa;
-	sa.bInheritHandle = TRUE;
+	//SECURITY_ATTRIBUTES sa;
+	//sa.bInheritHandle = TRUE;
 	cout << "Enter the parameter to be passed to thread" << endl;
 	cin >> content;
 	hThread = CreateThread(NULL, 0, ThreadFunction, content, 0, &dwThreadId);

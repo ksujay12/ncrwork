@@ -59,25 +59,25 @@ int main()
 	switch (choice)
 	{
 	case 1: printf("Enter the string");
-		scanf_s("%s", s1,10);
+		scanf_s("%s", s1, 10);
 		printf("%s", STRREV(s1));
 		break;
 	case 2:printf("Enter string 1");
-		scanf_s("%s", s1,10);
+		scanf_s("%s", s1, 10);
 		printf("Enter string 2");
-		scanf_s("%s", s2,10);
+		scanf_s("%s", s2, 10);
 		printf("%d", STRCMP(s1, s2));
 		break;
 	case 3:printf("Enter string 1");
-		scanf_s("%s", s1,10);
+		scanf_s("%s", s1, 10);
 		printf("Enter string 2");
-		scanf_s("%s", s2,10);
+		scanf_s("%s", s2, 10);
 		printf("%s", STRCAT(s1, s2));
 		break;
 	case 4:printf("Enter string 1");
-		scanf_s("%s", s1,10);
+		scanf_s("%s", s1, 10);
 		printf("Enter string 2");
-		scanf_s("%s", s2,10);
+		scanf_s("%s", s2, 10);
 		printf("%s", STRCPY(s1, s2));
 		break;
 	default:printf("Enter a valid option");

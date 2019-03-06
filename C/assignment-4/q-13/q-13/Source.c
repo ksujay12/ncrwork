@@ -4,7 +4,7 @@ int main()
 {
 	char s[20], begin, end, x = '-';
 	int i, j;
-	scanf_s("%s", s, 20);
+	scanf("%s", s);
 	printf("%c", s[0]);
 	for (i = 0;i < strlen(s);i++)
 	{
@@ -12,9 +12,17 @@ int main()
 		{
 			begin = s[i];
 			end = s[i + 2];
-			for (j = begin+1;j < end ;j++)
+			if (begin < end)
 			{
-				printf("%c", j);
+				
+				for (j = begin + 1;j < end;j++)
+				{
+					printf("%c", j);
+				}
+			}
+			else
+			{
+				printf("please check the input ***ERROR**\n");
 			}
 		}
 		else

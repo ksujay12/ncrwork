@@ -2,12 +2,12 @@
 #include<string.h>
 int main()
 {
-	char s[20], begin, end,x = '-';
+	char s[20], begin, end;
 	int i, r;
 	scanf_s("%s", s, 20);
 	for (i = 0;i < strlen(s);i++)
 	{
-		if (strcmp_s(s[i],10, x) == 0)
+		if (s[i]== '-')
 		{
 			begin = s[i - 1];
 			end = s[i + 1];
