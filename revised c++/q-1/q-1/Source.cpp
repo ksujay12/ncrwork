@@ -13,7 +13,7 @@ public:
 	complex(float r)
 	{
 		cout << "one parameterized constructor" << endl;
-		real =img= r ;
+		real = img = r;
 	}
 	complex(float r, float i)
 	{
@@ -30,7 +30,7 @@ public:
 			cout << "The complex number is:" << real << "" << img << 'i' << endl;
 	}
 
-	friend void add(complex &c1,complex &c2);
+	friend void add(complex &c1, complex &c2);
 	friend void mul(complex &c1, complex &c2);
 
 };
@@ -47,7 +47,7 @@ void add(complex &a1, complex &a2)
 }
 void mul(complex &a1, complex &a2)
 {
-	float real1 = (a1.real * a2.real)-(a1.img*a2.img);
+	float real1 = (a1.real * a2.real) - (a1.img*a2.img);
 	float img1 = (a1.real * a2.img) + (a2.real*a1.img);
 
 	if (img1 >= 0)

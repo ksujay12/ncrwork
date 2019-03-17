@@ -3,7 +3,7 @@
 #define size 100
 char* STRREV(char *s1)
 {
-	int i, j;
+	int i, j;//iterators
 	for (i = 0, j = strlen(s1) - 1;i < j;i++, j--)
 	{
 		char ch;
