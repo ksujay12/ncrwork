@@ -7,7 +7,7 @@ public:
 	char *s;
 	int len;
 public:
-	string1()
+	string1()//default constructor
 	{
 
 	}
@@ -19,24 +19,24 @@ public:
 	}
 	string1(const char *x,int l)//two parameterized
 	{
-		s = new char[l];
+		s = new char[l+1];
 		strcpy(s, x);
 	}
-	string1(const string1 &temp)
+	string1(const string1 &temp)//copy constructor
 	{
 		len = temp.len;
 		s = new char[len+1];
 		strcpy(s, temp.s);
 	}
-	~string1()
+	~string1()//destructor
 	{
 
 	}
-	char& operator[](int n)
+	char& operator[](int n)//overloading index operator
 	{
 		return s[n];
 	}
-	/*string1 operator =(string1 x)
+	/*string1 operator =(string1 x)//overloading =operator
 	{
 		len = x.len;
 		s = new char[x.len];
@@ -44,12 +44,7 @@ public:
 		return s;
 	}
 	*/
-	string1(char *t)
-	{
-		len = strlen(t);
-		s = new char[len + 1];
-		strcpy(s, t);
-	}
+	
 	friend string1 operator+(string1 &x, string1 &y);
 	friend ostream& operator<<(ostream &cout, const string1 &s);
 	friend istream& operator>>(istream &cin, string1 &x);
@@ -94,7 +89,7 @@ int main()
 	cin >> temp;
 	cout << "\n\nPassing two values into a paramaeterized constructor\n";
 	string1 str_two_param(temp, (len_str + 1));
-	cout << "\n Printing the value here ----";
+	cout << "\n Printing the value here ----  ";
 	cout << str_two_param;
 
 	//Creating two instances and passing the values into single parameter constructor

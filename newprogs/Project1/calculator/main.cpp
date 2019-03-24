@@ -1,279 +1,211 @@
 #include<iostream>
-int result = 0;
-int add(int a, int b);
-int multiply(int a, int b);
-int substract(int a, int b);
-float divide(int a, int b);
+#include "multiply.h"
+#include "addition.h"
+#include "division.h"
+#include "subtraction.h"
+#define str_size 20
 using namespace std;
-#define SIZE 100
-class _Stack_
+int prec(char c)
 {
-	struct sta
-	{
-		int top;
-		char *elements;
-		int size;
-	}stack;
-public:
-	_Stack_()
-	{
-	}
-	_Stack_(int size)
-	{
-		stack.size = size;
-		stack.elements = new char[size];
-		stack.top = -1;
-	}
-	bool isEmpty()
-	{
-		if (stack.top == -1)
-			return true;
-		return false;
-	}
-	bool isFull()
-	{
-		if (stack.top == stack.size - 1)
-		{
-			return true;
-		}
-		return false;
-	}
-	void Push(char x)
-	{
-		if (stack.top == stack.size - 1)
-		{
-			cout << "Stack Full";
-			return;
-		}
-		else
-		{
-			stack.elements[++stack.top] = x;
-		}
-	}
-	char Pop()
-	{
-		int x = -999;
-		if (stack.top == -1)
-		{
-			//cout<<"Stack Empty";
-			return x;
-		}
-		x = stack.elements[stack.top--];
-		return x;
-	}
-	char Peek()
-	{
-		int x = -999;
-		if (stack.top == -1)
-		{
-			//cout<<"Stack Empty";
-			return x;
-		}
-		else
-		{
-			x = stack.elements[stack.top];
-			return x;
-		}
-	}
-	void Display()
-	{
-		for (int i = 0;i <= stack.top;i++)
-		{
-			cout << stack.elements[i];
-		}
-	}
-	/*void GetSize(int size)
-	{
-		stack.size = size;
-	}*/
-	~_Stack_()
-	{
-		delete (stack.elements);
-	}
-};
-int Precedence(char x)
-{
-	if (x == '*' || x == '/')
-		return  3;
-	else if (x == '+' || x == '-')
-		return 2;
+	if (c == '*' || c == '/')
+		return 10;
+	else if (c == '+' || c == '-')
+		return 9;
 	else
-		return 1;
+		return 0;
 }
-class _StackInt_
+struct stack1 {
+	int size;
+	char *s;
+	int top;
+};
+class stack_class
 {
-	struct sta
-	{
-		int top;
-		int *elements;
-		int size;
-	}stack;
+	stack1 stk;
 public:
-	_StackInt_()
+	stack_class()
 	{
+		stk.size = 0;
+		stk.s = NULL;
+		stk.top = -1;
 	}
-	_StackInt_(int size)
+	void getsize(int n)
 	{
-		stack.size = size;
-		stack.elements = new int[size];
-		stack.top = -1;
+		stk.size = n;
+		stk.s = new char[n];
 	}
-	bool isEmpty()
+	void push(char ele)
 	{
-		if (stack.top == -1)
-			return true;
-		return false;
+		if (!IsFull())
+			stk.s[++stk.top] = ele;
+		else
+			cout << "Overflow" << endl;
 	}
-	bool isFull()
+	bool IsFull()
 	{
-		if (stack.top == stack.size - 1)
+		return(stk.top == (stk.size - 1));
+	}
+	char pop()
+	{
+		if (!Isempty())
+			return(stk.s[stk.top--]);
+		else
+			cout << "Underflow";
+	}
+	bool Isempty()
+	{
+		return (stk.top == -1);
+	}
+	char peek()
+	{
+		return(stk.s[stk.top]);
+	}
+	void display()
+	{
+		for (int i = 0; i <= stk.top; i++)
+			cout << stk.s[i] << endl;
+	}
+	char getele(int n)
+	{
+		return(stk.s[n]);
+	}
+	int givetop()
+	{
+		return stk.top;
+	}
+
+};
+char *infix_postfix(char * str)
+{
+	stack_class st;
+	st.getsize(10);
+	char ch;
+	char *strop = (char *)malloc(sizeof(char)*(str_size));
+	int j = 0, c = 0;
+	for (int i = 0; i < strlen(str); i++)
+	{
+		ch = str[i];
+		if (isdigit(ch))
 		{
-			return true;
+			//cout << "hello";
+			strop[j] = ch;
+			j++;
 		}
-		return false;
-	}
-	void Push(int x)
-	{
-		if (stack.top == stack.size - 1)
+		else
 		{
-			cout << "Stack Full";
+			if (st.Isempty())
+			{
+				st.push(ch);
+			}
+			else if ((prec(st.peek()) >= prec(ch)))
+			{
+				while ((prec(st.peek()) >= prec(ch))) {
+					strop[j] = st.pop();
+					j++;
+				}
+				st.push(ch);
+			}
+
+			else
+			{
+				st.push(ch);
+
+			}
+		}
+	}
+	while (!st.Isempty())
+	{
+		strop[j] = st.pop();
+		j++;
+	}
+	strop[j] = '\0';
+	return strop;
+}
+int postfix_evalu(char *tobe_str)
+{
+	stack_class st;
+	st.getsize(10);
+	char ch;
+	int n, i, j, res, temp;
+	for (i = 0; i < strlen(tobe_str); i++)
+	{
+		if (isdigit(tobe_str[i]))
+		{
+			j = tobe_str[i] - '0';
+			st.push(j);
+		}
+		else
+		{
+			if (st.givetop() > 0)
+			{
+				temp = 0;
+				cout << endl;
+				temp = st.pop();
+				switch (tobe_str[i])
+				{
+				case'*':
+					/*cout << "in multi" << endl;*/
+			/*		cout << "temp=" << temp << endl;
+					cout << "top=" << st.givetop() << endl;*/
+					temp = multi(temp, st.peek());
+					/*cout << "temp=" << temp <<endl;*/
+					st.pop();
+					st.push(temp);
+					break;
+				case'+':
+					/*	cout << "in add" << endl;*/
+					temp = add(temp, st.peek());
+					st.pop();
+					st.push(temp);
+					break;
+
+				case'-':
+					/*cout << "in sub" << endl;*/
+					temp = sub(temp, st.peek());
+					st.pop();
+					st.push(temp);
+					break;
+				case'/':
+					/*cout << "in div" << endl;*/
+					temp = divi(temp, st.peek());
+					st.pop();
+					st.push(temp);
+					break;
+
+				default:
+					break;
+				}
+			}
+		}
+	}
+	return temp;
+}
+void main()
+{
+	char str_in[25];
+	char *op_str = NULL;
+	int result;
+	cout << "Enter the string to be calcuated without the braces\n";
+	cin >> str_in;
+	for (int i = 0; i < strlen(str_in); i++)
+	{
+		if (str_in[i] != '+'&&str_in[i] != '-'&&str_in[i] != '*'&&str_in[i] != '/' && !(isdigit(str_in[i])))
+		{
+			cout << "Nope seomething is wrong with your input" << endl;
+			system("pause");
+
 			return;
 		}
-		else
+		else if ((str_in[i] == '+' || str_in[i] == '-' || str_in[i] == '*' || str_in[i] == '/') && (str_in[i + 1] == '+' || str_in[i + 1] == '-' || str_in[i + 1] == '*' || str_in[i + 1] == '/'))
 		{
-			stack.elements[++stack.top] = x;
+			cout << "Nope seomething is wrong with your input" << endl;
+			system("pause");
+
+			return;
 		}
 	}
-	int Pop()
-	{
-		int x = -999;
-		if (stack.top == -1)
-		{
-			cout << "Stack Empty";
-			return x;
-		}
-		else
-		{
-			x = stack.elements[stack.top--];
-			return x;
-		}
-	}
-	int Peek()
-	{
-		int x = -999;
-		if (stack.top == -1)
-		{
-			cout << "Stack Empty";
-			return x;
-		}
-		else
-		{
-			x = stack.elements[stack.top];
-			return x;
-		}
-	}
-	void Display()
-	{
-		for (int i = 0;i <= stack.top;i++)
-		{
-			cout << stack.elements[i] << endl;
-		}
-	}
-	/*void GetSize(int size)
-	{
-		stack.size = size;
-	}*/
-	~_StackInt_()
-	{
-		delete (stack.elements);
-	}
-};
-int main()
-{
-	char input_string[SIZE];
-	cout << "Enter the string";
-	cin >> input_string;
-	char result[SIZE];
-	_Stack_ s(10);
-	int curr = 0;
-	char ch;
-	int k = 0;
-	for (int i = 0;i < strlen(input_string);i++)
-	{
-		ch = input_string[i];
-		if (isdigit(ch) || isalpha(ch))
-		{
-			result[k++] = ch;
-		}
-		else if (ch == '(')
-		{
-			//cout<<"2 - "<<ch<<"\n";
-			s.Push(ch);
-		}
-		else if (ch == ')')
-		{
-			while (s.Peek() != '(')
-			{
-				//cout<<"3 - "<<ch<<"\n";
-				result[k++] = s.Pop();
-			}
-			s.Pop();
-		}
-		else if (s.isEmpty())
-		{
-			//cout<<"1 - "<<ch<<"\n";
-			s.Push(ch);
-		}
-		else if (Precedence(ch) > Precedence(s.Peek()))
-		{
-			//cout<<"4 - "<<ch<<"\n"; 
-			s.Push(ch);
-		}
-		else
-		{
-			while (Precedence(ch) <= Precedence(s.Peek()))
-			{
-				//cout<<"5 - "<<ch<<"\n";
-				result[k++] = s.Pop();
-			}
-			//cout<<"6 - "<<ch<<"\n";
-			s.Push(ch);
-		}
-	}
-	while (!s.isEmpty())
-	{
-		//cout<<"7 - "<<ch<<"\n";
-		result[k++] = s.Pop();
-	}
-	result[k] = '\0';
-	cout << "String - " << result << endl;
-	_StackInt_ s1(10);
-	for (int i = 0;i < strlen(result);i++)
-	{
-		char ch;
-		ch = result[i];
-		if (isdigit(ch) && !s1.isFull())
-		{
-			s1.Push(ch - '0');
-		}
-		else
-		{
-			int a = s1.Pop();
-			int b = s1.Pop();
-			switch (ch)
-			{
-			case '+': s1.Push(add(a, b));
-				break;
-			case '-': s1.Push(substract(b, a));
-				break;
-			case '*': s1.Push(multiply(b, a));
-				break;
-			case '/': s1.Push(divide(b, a));
-				break;
-			}
-		}
-	}
-	cout << "Result - " << s1.Pop();
+	op_str = infix_postfix(str_in);
+	result = postfix_evalu(op_str);
+	cout << "The required result---" << result << endl;
 	system("pause");
-	return 0;
 }
